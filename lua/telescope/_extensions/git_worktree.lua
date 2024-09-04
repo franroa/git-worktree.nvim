@@ -9,6 +9,7 @@ local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local conf = require('telescope.config').values
 local git_worktree = require('git-worktree')
+local Config = require('git-worktree.config')
 
 local force_next_deletion = false
 
@@ -154,6 +155,7 @@ local telescope_git_worktree = function(opts)
     }
 
     local make_display = function(entry)
+        local path, _ = utils.transform_path(opts, entry.path)
         return displayer {
             { entry.branch, 'TelescopeResultsIdentifier' },
             { utils.transform_path(opts, entry.path), 'TelescopeResultsComment' },
